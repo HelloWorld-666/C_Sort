@@ -69,7 +69,7 @@ void quick_sort(int* array, int left, int right)
             while(left<right)					// 比到自己比自己就退出。
             {
                temp=array[left_bc]; 
-               while(array[right]>temp&&left<right)
+               while(array[right] >= temp&&left<right)
                {
                   right--;
                }
@@ -77,7 +77,7 @@ void quick_sort(int* array, int left, int right)
                {
                    array[left]=array[right];	// 右侧数据中比temp基准小的放在左边（此前array[left]已经备份在temp中）
                }
-               while(array[left]<temp&&left<right)
+               while(array[left] <= temp&&left<right)
                {
                    left++;
                }
@@ -164,10 +164,11 @@ int main()
 {
 	int test_array[7] = { 5, 28, 73, 19, 6, 0, 5 };
 	int len = sizeof(test_array) / sizeof(int);
+	int right = len - 1; // 下标从0开始
 
 	//maopao_sort(test_array, len);
-	//quick_sort(test_array, 0, len);
-	//quick_sroting_not_by_recursion(test_array, 0, len);
+	//quick_sort(test_array, 0, right); // ok
+	//quick_sroting_not_by_recursion(test_array, 0, right); // ok
 	heap_sort(test_array, len);
 
 	printf("result:\t");
