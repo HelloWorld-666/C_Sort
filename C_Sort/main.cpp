@@ -136,7 +136,7 @@ void quick_sort(int* array, int left, int right)
 		 array[i] = array[j];						// temp<array[j]时:用孩子中较大的一个节点值替换掉父节点的基准值
 		 i = j;										// 将孩子节点看作下一个父节点，不断往下遍历
 	 }
-	 array[i] = temp;
+	 array[i] = temp;								// 将最终比较后较小的值放到合适的位置
  }
  
  void  heap_sort(int * array, int len)
@@ -144,19 +144,19 @@ void quick_sort(int* array, int left, int right)
 	 int i;
 	 for (i = len/2 - 1; i>=0; i--)					// i:二叉树的最后一个父节点下标(从下到上)  i--：如果符合堆的条件，则i--，移到倒数第二个父节点
 	 {
-		 create_heap(array, i, len);
+		create_heap(array, i, len);
 	 }
 	
-	 for (i = 1; i < len; i++)						// 把大顶堆根节点(下标为0)上的最大值交换到末尾，置换出来.
+	 for (int i = len - 1; i > 0; i--)			// i > 0 (减1：因为数组下标是从0开始)
 	 {
-		 swap_fun(array, 0, len-i);	 // 0 <-> 
-		 create_heap(array, 0, len - i);			// ！！！此处若为len-i-1，则上面是i+1<=len；两种方式都可以.
+		swap_fun(array, 0, i);
+		create_heap(array, 0, i);					// 重新构建堆的时候，第二个参数是0？？？？？：永远和堆顶元素交换位置，即 下标0
 	 }
 
-	 //for (int i = len - 1; i > 0; i--)				// i > 0
+	 //for (i = 0; i < len; i++)						// 把大顶堆根节点(下标为0)上的最大值交换到末尾，置换出来. 
 	 //{
-		// swap_fun(array, 0, i);
-		// create_heap(array, 0, i);					// 重新构建堆的时候，第二个参数是0？？？？？：永远和堆顶元素交换位置，即 下标0
+		// swap_fun(array, 0, len-i-1);				
+		// create_heap(array, 0, len - i-1);			// ！！！此处若为len-i-1，则上面是i+1<=len；两种方式都可以.
 	 //}
  }
 
