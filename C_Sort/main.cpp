@@ -147,7 +147,7 @@ void quick_sort(int* array, int left, int right)
 		create_heap(array, i, len);
 	 }
 	
-	 for (int i = len - 1; i > 0; i--)			// i > 0 (减1：因为数组下标是从0开始)
+	 for (int i = len - 1; i > 0; i--)				// i > 0 (减1：因为数组下标是从0开始)
 	 {
 		swap_fun(array, 0, i);
 		create_heap(array, 0, i);					// 重新构建堆的时候，第二个参数是0？？？？？：永远和堆顶元素交换位置，即 下标0
@@ -160,8 +160,59 @@ void quick_sort(int* array, int left, int right)
 	 //}
  }
 
-int main()
-{
+ /*******************************归并*******************************/
+ void merge_sort(int* array1, int len1, int* array2, int len2)
+ {
+	 int i = 0;
+	 int j = 0;
+	 int k = 0;
+	 int tmp[10];
+	 // 1.分别将两个子数组中较小一方的值按大小顺序移动到临时数组tmp中
+	 while (i < len1 && j < len2)
+	 {
+		 if (array1[i] < array2[j])
+		 {
+			 tmp[k++] = array1[i++];
+		 }
+		 else
+		 {
+			 tmp[k++] = array2[j++];
+		 }
+	 }
+	 // 2.肯定存在一个子数组先移动完，所以需要将另一个未移动完的有序子数组剩下的元素继续移动到tmp中
+	 while (i < len1)
+	 {
+		 tmp[k++] = array1[i++];
+	 }
+	 while (j < len2)
+	 {
+		 tmp[k++] = array2[j++];
+	 }
+
+	 // 3.将合并数组值赋给原始数组
+	 for (int q = 0; q < len1 + len2; q++)
+	 {
+		 array1[q] =  tmp[q];			// int* subArray1 = array; subArray1中包含原数组的所有元素
+	 }
+ }
+
+ // 拆分函数
+ void merge(int* array, int len)
+ {
+	 if (len > 1)						// 最后拆至每个子数组只有一个元素
+	 {
+		 int len1 = len / 2;
+		 int len2 = len - len1;
+		 int* subArray1 = array;
+		 int* subArray2 = array + len1;
+		 merge(subArray1, len1);
+		 merge(subArray2, len2);
+		 merge_sort(subArray1, len1, subArray2, len2);
+	 }
+ }
+
+ int main()
+ {
 	int test_array[7] = { 5, 28, 73, 19, 6, 0, 5 };
 	int len = sizeof(test_array) / sizeof(int);
 	int right = len - 1; // 下标从0开始
@@ -169,7 +220,8 @@ int main()
 	//maopao_sort(test_array, len);
 	//quick_sort(test_array, 0, right); // ok
 	//quick_sroting_not_by_recursion(test_array, 0, right); // ok
-	heap_sort(test_array, len);
+	//heap_sort(test_array, len);
+	merge(test_array, len);
 
 	printf("result:\t");
 	printf_array(test_array, len);
