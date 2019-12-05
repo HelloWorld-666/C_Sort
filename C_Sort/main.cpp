@@ -12,6 +12,25 @@ void  printf_array(int *array, int len)
 	printf("\n");
 }
 
+/*******************************冒泡*******************************/
+void maopao_sort(int *array, int len)
+{
+	int i, j, tmp;
+	for (i = 0; i < len; i++)
+	{
+		for (j = i + 1; j < len; j++)
+		{
+			if (array[i] > array[j])
+			{
+				tmp = array[i];
+				array[i] = array[j];
+				array[j] = tmp;
+			}
+		}
+	}
+}
+
+/*******************************递归快排*******************************/
 // 1.recursion quick sort：
 int quick_sorting(int* array, int left, int right)
 {
@@ -58,6 +77,8 @@ void quick_sort(int* array, int left, int right)
 	}
 }
 
+
+/*******************************非递归快排*******************************/
 // 2.no recursion quick sort：
  void quick_sroting_not_by_recursion(int *array,int left,int right)
  {
@@ -94,23 +115,7 @@ void quick_sort(int* array, int left, int right)
      }          
  }
 
- void maopao_sort(int *array, int len)
- {
-	 int i, j, tmp;
-	 for (i = 0; i < len; i++)
-	 {
-		 for (  j = i+1; j < len; j++)
-		 {
-			 if (array[i] > array[j])
-			 {
-				 tmp = array[i];
-				 array[i] = array[j];
-				 array[j] = tmp;
-			 }
-		 }
-	 }
- }
-
+ /*******************************堆排*******************************/
  //交换元素
  void swap_fun(int *array, int i, int j)
  {
@@ -160,13 +165,14 @@ void quick_sort(int* array, int left, int right)
 	 //}
  }
 
+
  /*******************************归并*******************************/
  void merge_sort(int* array1, int len1, int* array2, int len2)
  {
 	 int i = 0;
 	 int j = 0;
 	 int k = 0;
-	 int tmp[10];
+	 int tmp[10];						// 临时数组 后续要优化，不能固定为10
 	 // 1.分别将两个子数组中较小一方的值按大小顺序移动到临时数组tmp中
 	 while (i < len1 && j < len2)
 	 {
