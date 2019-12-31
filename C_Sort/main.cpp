@@ -172,7 +172,8 @@ void quick_sort(int* array, int left, int right)
 	 int i = 0;
 	 int j = 0;
 	 int k = 0;
-	 int tmp[10];						// 临时数组 后续要优化，不能固定为10
+	 //int tmp[10];						// 临时数组 后续要优化，不能固定为10
+	 int* tmp = new int[10];
 	 // 1.分别将两个子数组中较小一方的值按大小顺序移动到临时数组tmp中
 	 while (i < len1 && j < len2)
 	 {
