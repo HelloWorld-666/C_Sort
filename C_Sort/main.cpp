@@ -201,6 +201,8 @@ void quick_sort(int* array, int left, int right)
 	 {
 		 array1[q] =  tmp[q];			// int* subArray1 = array; subArray1中包含原数组的所有元素
 	 }
+
+	 free(tmp);
  }
 
  // 拆分函数
