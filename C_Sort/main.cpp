@@ -87,7 +87,7 @@ void quick_sort(int* array, int left, int right)
      int right_bc=right;
      while(left_bc<right_bc)
      {
-            while(left<right)					// 比到自己比自己就退出。
+            while(left < right)					// 比到自己比自己就退出。
             {
                temp=array[left_bc]; 
                while(array[right] >= temp&&left<right)
@@ -102,7 +102,7 @@ void quick_sort(int* array, int left, int right)
                {
                    left++;
                }
-               if(left<right)
+               if(left < right)
                {
                    array[right]=array[left];	// 左侧数据中比temp基准大的放在右边
                }
